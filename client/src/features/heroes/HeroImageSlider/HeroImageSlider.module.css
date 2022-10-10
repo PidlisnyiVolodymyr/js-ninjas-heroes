@@ -1,0 +1,18 @@
+.slider {
+	position: relative;
+}
+.button {
+	background: rgba(255, 255, 255, 0.5);
+	border: none;
+	position: absolute;
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+	top: calc(50% - 16px);
+}
+.button_left {
+	left: 0;
+}
+.button_right {
+	right: 0;
+}
