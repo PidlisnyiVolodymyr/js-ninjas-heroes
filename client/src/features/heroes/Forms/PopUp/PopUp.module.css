@@ -1,0 +1,24 @@
+.wrapper {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	content: '';
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(238, 238, 238, 0.5);
+	width: 100vw;
+	height: 100vh;
+	z-index: 2;
+	color: #222;
+}
+.form {
+	padding: 16px;
+	border-radius: 16px;
+	background-color: #eee;
+	display: grid;
+	gap: 10px;
+	width: 60%;
+}

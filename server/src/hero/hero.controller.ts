@@ -41,7 +41,10 @@ export class HeroController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.heroService.findOneById(id);
+    return this.heroService.findOneById(id, {
+      superPowers: true,
+      images: true,
+    });
   }
 
   @Patch(':id')
@@ -52,5 +55,10 @@ export class HeroController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.heroService.remove(id);
+  }
+
+  @Delete('image/:name')
+  deleteFile(@Param('name') name: string) {
+    return this.heroService.deleteImage(name);
   }
 }

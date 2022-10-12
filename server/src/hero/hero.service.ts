@@ -104,6 +104,10 @@ export class HeroService {
     return await this.heroesRepository.save({ ...hero, images });
   }
 
+  async deleteImage(name: string) {
+    return await this.imagesService.deleteFileByName(name);
+  }
+
   async findOneByName(
     nickName: string,
     relations?: FindOptionsRelations<Hero>,

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { IHero } from '../../../models/IHero';
-import HeroesListItem from '../HeroesListItem/HeroesListItem';
+import HeroesListItem from './HeroesListItem/HeroesListItem';
 import classes from './HeroesList.module.css';
 
 interface IProps {

@@ -1,7 +1,14 @@
 .slider {
 	position: relative;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+	border: solid 2px #eee;
+	border-radius: 8px;
+	padding: 4px;
 }
 .button {
+	display: none;
 	background: rgba(255, 255, 255, 0.5);
 	border: none;
 	position: absolute;
@@ -9,6 +16,9 @@
 	height: 32px;
 	cursor: pointer;
 	top: calc(50% - 16px);
+}
+.slider:hover > .button {
+	display: block;
 }
 .button_left {
 	left: 0;

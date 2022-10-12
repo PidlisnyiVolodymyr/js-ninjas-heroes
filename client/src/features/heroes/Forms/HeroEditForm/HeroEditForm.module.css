@@ -1,0 +1,16 @@
+.images {
+	display: flex;
+	overflow-x: scroll;
+	height: 300px;
+}
+.imageWrapper {
+	position: relative;
+}
+.imageDeleteButton {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 32px;
+	height: 32px;
+	font-size: 1.2rem;
+}

@@ -1,0 +1,13 @@
+.imageWrapper {
+	height: 300px;
+	width: 300px;
+}
+.hero {
+	flex: 1 0 auto;
+}
+.heroContent {
+	border-left: 2px solid #eee;
+	border-right: 2px solid #eee;
+	color: #eee;
+	padding: 20px;
+}

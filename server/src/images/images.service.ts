@@ -32,6 +32,19 @@ export class ImagesService {
     });
   }
 
+  async deleteFileByName(name: string) {
+    const file = await this.imagesRepository.findOne({ where: { name } });
+    rm(file.path, (err) => {
+      if (err) {
+        throw new HttpException(
+          "Couldn't delete file",
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
+      }
+    });
+    return await this.imagesRepository.remove(file);
+  }
+
   saveFile(directoryPath: string, file: Express.Multer.File) {
     const fileName = uuidv4();
     const fileExtention = file.originalname.split('.').pop();

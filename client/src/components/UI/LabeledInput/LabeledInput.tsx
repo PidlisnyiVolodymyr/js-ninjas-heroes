@@ -5,22 +5,17 @@ interface IProps {
 	name: string;
 	value: string;
 	label: string;
-	onChange: ({ name, value }: { name: string; value: string }) => void;
+	onChange: (event: any) => void;
+	required?: boolean;
 }
 
-const LabeledInput: FC<IProps> = ({ name, value, label, onChange }) => {
+const LabeledInput: FC<IProps> = ({ name, value, label, onChange, required = false }) => {
 	return (
 		<div className={classes.wrapper}>
 			<label className={classes.label} htmlFor={name}>
 				{label}
 			</label>
-			<input
-				className={classes.input}
-				name={name}
-				type='text'
-				value={value}
-				onChange={({ target }) => onChange({ name, value: target.value })}
-			/>
+			<input className={classes.input} name={name} type='text' value={value} required={required} onChange={onChange} />
 		</div>
 	);
 };

@@ -1,0 +1,31 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #222;
+	padding: 16px;
+	border-bottom: 2px solid #eee;
+}
+.logo {
+	font-size: 1.4rem;
+	color: #ccc;
+}
+.dropDown {
+	position: relative;
+}
+.search,
+.button {
+	border: 2px solid #eee;
+	border-radius: 8px;
+	padding: 8px 16px;
+	font-size: 1.2rem;
+}
+.list {
+	position: absolute;
+	background-color: #222;
+	border-radius: 16px;
+	border: 2px solid #eee;
+	bottom: -60px;
+	padding: 8px 16px;
+	width: 100%;
+}

@@ -1,0 +1,22 @@
+.listItem {
+	display: grid;
+	grid-template: 40px 280px / 320px;
+	border-radius: 16px;
+	padding: 20px;
+	gap: 10px;
+	justify-content: center;
+	background-color: #222;
+}
+.listItem > {
+	color: #eee;
+	text-decoration: none;
+}
+.heroImageSlider {
+}
+.description {
+	grid-column: span 2;
+}
+
+.data {
+	font-size: 8px;
+}

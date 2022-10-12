@@ -1,20 +1,21 @@
 import React, { FC } from 'react';
+import { useDeleteSuperPowerMutation } from '../../../api/superPowersApi';
+import { ISuperPower } from '../../../models/ISuperPower';
 import classes from './MultipleSelect.module.css';
 
 interface IProps {
-	list: string[];
-	onChange: (options: string[]) => void;
+	list: ISuperPower[];
+	required?: boolean;
+	onChange: (arg: any) => void;
 }
 
-const MultipleSelect: FC<IProps> = ({ list, onChange }) => {
+const MultipleSelect: FC<IProps> = ({ list, onChange, required = false }) => {
 	return (
-		<select
-			className={classes.select}
-			multiple
-			onChange={(event) => onChange(Array.from(event.target.options).map((option) => option.value))}
-		>
+		<select required={required} className={classes.select} multiple onChange={onChange}>
 			{list.map((option) => (
-				<option className={classes.option}>{option}</option>
+				<option key={option.id} value={option.id} className={classes.option}>
+					{option.name}
+				</option>
 			))}
 		</select>
 	);
