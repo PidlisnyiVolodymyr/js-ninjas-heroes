@@ -33,7 +33,6 @@ export class HeroService {
       superPowers: true,
     });
     const superPowers = [];
-    console.log('HERO: ', heroData);
 
     if (heroCandidate) {
       throw new HttpException(
@@ -106,6 +105,34 @@ export class HeroService {
 
   async deleteImage(name: string) {
     return await this.imagesService.deleteFileByName(name);
+  }
+
+  async getPartialHeroes({
+    page,
+    heroesPerPage,
+  }: {
+    page: number;
+    heroesPerPage: number;
+  }) {
+    const allHeroes = await this.findAll();
+    const from = (page - 1) * heroesPerPage;
+    const till =
+      page * heroesPerPage < allHeroes.length
+        ? page * heroesPerPage
+        : allHeroes.length;
+    console.log('FROM: ', from);
+    console.log('TILL: ', till);
+
+    const heroes = allHeroes.slice(from, till);
+    console.log(heroes);
+
+    const res = {
+      heroes,
+      totalPages: Math.ceil(allHeroes.length / heroesPerPage),
+    };
+    console.log(res);
+
+    return res;
   }
 
   async findOneByName(

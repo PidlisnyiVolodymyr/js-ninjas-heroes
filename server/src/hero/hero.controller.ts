@@ -34,6 +34,20 @@ export class HeroController {
     return this.heroService.uploadHeroImages(heroId, files);
   }
 
+  @Get(':page/:heroesPerPage')
+  getPartialHeroes(
+    @Param('page') page: number,
+    @Param('heroesPerPage') heroesPerPage: number,
+  ) {
+    console.log('Page: ', page);
+    console.log('heroesPerPage: ', heroesPerPage);
+
+    return this.heroService.getPartialHeroes({
+      page: +page,
+      heroesPerPage: +heroesPerPage,
+    });
+  }
+
   @Get()
   findAll() {
     return this.heroService.findAll();

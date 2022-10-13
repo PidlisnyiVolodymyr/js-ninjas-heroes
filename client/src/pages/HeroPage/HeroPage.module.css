@@ -1,13 +1,32 @@
 .imageWrapper {
-	height: 300px;
-	width: 300px;
+	display: flex;
+	align-items: center;
+	margin: 8px 16px 0 0;
 }
 .hero {
+	display: flex;
+	height: 100%;
 	flex: 1 0 auto;
 }
 .heroContent {
+	padding: 16px;
 	border-left: 2px solid #eee;
 	border-right: 2px solid #eee;
 	color: #eee;
-	padding: 20px;
+	height: 100%;
+}
+.divider {
+	height: 2px;
+	width: 100%;
+	background-color: #eee;
+	margin: 16px 0;
+}
+.button {
+	padding: 8px 16px;
+	background-color: transparent;
+	border: 2px solid #eee;
+	border-radius: 8px;
+	color: #eee;
+	margin: 0 8px;
+	cursor: pointer;
 }

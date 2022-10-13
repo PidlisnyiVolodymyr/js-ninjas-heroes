@@ -1,12 +1,14 @@
 import React, { FC } from 'react';
-import Row from '../../layout/Row/Row';
+import Container from '../../layout/Container/Container';
 import classes from './Footer.module.css';
 
 const Footer: FC = () => (
 	<footer className={classes.footer}>
-		<Row>
-			<h3>Created By: Volodymyr Pidlisnyi</h3>
-		</Row>
+		<Container>
+			<div className={classes.wrapper}>
+				<h3>Created By: Volodymyr Pidlisnyi</h3>
+			</div>
+		</Container>
 	</footer>
 );
 

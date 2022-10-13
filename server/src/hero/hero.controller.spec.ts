@@ -1,39 +1,52 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { CreateHeroDto } from './dto/create-hero.dto';
+import { HttpException, HttpStatus } from '@nestjs/common';
+import { setupDataSource } from './../../test/fakeDB';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { HeroController } from './hero.controller';
 import { HeroService } from './hero.service';
+import { Test, TestingModule } from '@nestjs/testing';
+import { Hero } from './entities/hero.entity';
+import { Connection } from 'typeorm';
 
-describe('HeroController', () => {
-  let controller: HeroController;
+describe('Hero Controller', () => {
+  let heroController: HeroController;
+  let connection: Connection;
 
-  const mockHeroService = {
-    create: jest.fn(),
-  };
+  beforeAll(async () => {
+    connection = await setupDataSource();
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    const heroModule: TestingModule = await Test.createTestingModule({
+      imports: [TypeOrmModule.forFeature([Hero])],
       controllers: [HeroController],
       providers: [HeroService],
-    })
-      .overrideProvider(HeroService)
-      .useValue(mockHeroService)
-      .compile();
+    }).compile();
 
-    controller = module.get<HeroController>(HeroController);
+    heroController = heroModule.get<HeroController>(HeroController);
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+  describe('Create Hero', () => {
+    const hero: CreateHeroDto = {
+      realName: 'Bruce Wayne',
+      nickName: 'Batman',
+      originDescription: 'Has too much money',
+      catchPhrase: 'Money!',
+      images: [],
+      superPowersIds: [],
+    };
 
-  it('Should Create a Hero', () => {
-    expect(
-      controller.create({
-        realName: 'Batman',
-        nickName: 'Bruce Wayne',
-        catchPhrase: 'Money!',
-        originDescription: 'Origin!',
-        superPowersIds: [],
-      }),
-    );
+    it('Should return the hero', async () => {
+      const createdHero = await heroController.create(hero);
+      expect(createdHero.nickName).toBe(hero.nickName);
+    });
+
+    it('Should return CONFLICT', async () => {
+      await heroController.create(hero);
+      await expect(heroController.create(hero)).rejects.toThrow(
+        new HttpException(
+          'Hero with that name is already exist',
+          HttpStatus.CONFLICT,
+        ),
+      );
+    });
   });
 });

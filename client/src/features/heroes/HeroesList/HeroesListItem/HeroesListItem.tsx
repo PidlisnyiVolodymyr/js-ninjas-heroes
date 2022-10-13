@@ -10,18 +10,16 @@ interface IProps {
 
 const HeroesListItem: FC<IProps> = ({ hero }) => {
 	return (
-		<li>
-			<div className={classes.listItem}>
-				<Link to={'/' + hero.id}>
-					<h2>{hero.nickName}</h2>
-				</Link>
-				<div className={classes.heroImageSlider}>
-					{hero.images?.length ? (
-						<HeroImageSlider images={hero.images} heroId={hero.id as string} />
-					) : (
-						<span>No Images</span>
-					)}
-				</div>
+		<li className={classes.listItem}>
+			<Link to={'/' + hero.id}>
+				<h2>{hero.nickName}</h2>
+			</Link>
+			<div className={classes.heroImageSlider}>
+				{hero.images?.length ? (
+					<HeroImageSlider images={hero.images} heroId={hero.id as string} />
+				) : (
+					<span>No Images</span>
+				)}
 			</div>
 		</li>
 	);

@@ -1,0 +1,23 @@
+.heroesPage {
+	display: flex;
+	height: 100%;
+}
+.button {
+	padding: 16px;
+	background-color: transparent;
+	border: 1px solid #eee;
+	border-radius: 8px;
+	align-self: center;
+	color: #eee;
+	font-size: 1.4rem;
+	line-height: 1.4rem;
+	cursor: pointer;
+}
+.heroes {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	border-left: 2px solid #eee;
+	border-right: 2px solid #eee;
+}

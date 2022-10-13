@@ -4,6 +4,7 @@ import { useFetchHeroesQuery } from '../../../api/heroesApi';
 import { IHero } from '../../../models/IHero';
 import classes from './Header.module.css';
 import HeroCreationForm from '../../../features/heroes/Forms/HeroCreationForm/HeroCreationForm';
+import Container from '../../layout/Container/Container';
 const Header: FC = () => {
 	const [searchInput, setSearchInput] = useState<string>('');
 	const { data, isLoading, isSuccess } = useFetchHeroesQuery(null);
@@ -25,43 +26,48 @@ const Header: FC = () => {
 	};
 	return (
 		<header className={classes.header}>
-			{isFormOpen && <HeroCreationForm stateSetter={() => setIsFormOpen(false)} />}
-			<Link to='/'>
-				<h1 className={classes.logo}>Heroes!</h1>
-			</Link>
-			<div className={classes.dropDown}>
-				<input
-					className={classes.search}
-					type='text'
-					value={searchInput}
-					onChange={(event) => handleSearchChange(event.target.value)}
-				/>
-				{filteredList?.length ? (
-					<div className={classes.list}>
-						{filteredList.map((hero: IHero) => (
-							<Link
-								key={hero.id}
-								to={'/' + hero.id}
-								onClick={() => {
-									setSearchInput('');
-								}}
-							>
-								<h1>{hero.nickName}</h1>
-							</Link>
-						))}
+			<Container>
+				<div className={classes.wrapper}>
+					{isFormOpen && <HeroCreationForm stateSetter={() => setIsFormOpen(false)} />}
+					<Link to='/'>
+						<h1 className={classes.logo}>Heroes!</h1>
+					</Link>
+					<div className={classes.dropDown}>
+						<input
+							className={classes.search}
+							placeholder='Enter heros nickname'
+							type='text'
+							value={searchInput}
+							onChange={(event) => handleSearchChange(event.target.value)}
+						/>
+						{filteredList?.length ? (
+							<div className={classes.list}>
+								{filteredList.map((hero: IHero) => (
+									<Link
+										key={hero.id}
+										to={'/' + hero.id}
+										onClick={() => {
+											setSearchInput('');
+										}}
+									>
+										<h1>{hero.nickName}</h1>
+									</Link>
+								))}
+							</div>
+						) : (
+							''
+						)}
 					</div>
-				) : (
-					''
-				)}
-			</div>
-			<button
-				className={classes.button}
-				onClick={() => {
-					setIsFormOpen(true);
-				}}
-			>
-				Create Hero!
-			</button>
+					<button
+						className={classes.button}
+						onClick={() => {
+							setIsFormOpen(true);
+						}}
+					>
+						Create Hero!
+					</button>
+				</div>
+			</Container>
 		</header>
 	);
 };

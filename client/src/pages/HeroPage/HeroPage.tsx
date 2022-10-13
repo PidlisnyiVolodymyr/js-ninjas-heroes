@@ -16,6 +16,7 @@ const HeroPage: FC = () => {
 	const [deleteHero] = useDeleteHeroMutation();
 	const redirect = useNavigate();
 	const [isEditFormOpen, setIsEditFormOpen] = useState(false);
+
 	return (
 		<div className={classes.hero}>
 			<Container>
@@ -23,6 +24,7 @@ const HeroPage: FC = () => {
 					<div className={classes.heroContent}>
 						<Row>
 							<button
+								className={classes.button}
 								onClick={() => {
 									deleteHero(data.id);
 									redirect('/');
@@ -30,7 +32,9 @@ const HeroPage: FC = () => {
 							>
 								Delete
 							</button>
-							<button onClick={() => setIsEditFormOpen(true)}>Edit</button>
+							<button className={classes.button} onClick={() => setIsEditFormOpen(true)}>
+								Edit
+							</button>
 							{isEditFormOpen && <HeroEditForm hero={data} stateSetter={setIsEditFormOpen} />}
 						</Row>
 						<Row>
@@ -47,18 +51,23 @@ const HeroPage: FC = () => {
 								<Row>
 									<TitledParagraph title='Catch Phrase' paragrah={data.catchPhrase} />
 								</Row>
-								<Row>
-									{data.superPowers.map((superPower: ISuperPower) => (
-										<Col key={superPower.id}>
-											<TitledParagraph title={superPower.name} paragrah={superPower.description || ''} />
-										</Col>
-									))}
-								</Row>
 							</Col>
 						</Row>
 						<Row>
-							<TitledParagraph title='Description' paragrah={data.originDescription} />
+							<div className={classes.divider}></div>
 						</Row>
+						<Col>
+							<Row>
+								{data.superPowers.map((superPower: ISuperPower) => (
+									<Col key={superPower.id}>
+										<TitledParagraph title={superPower.name} paragrah={superPower.description || ''} />
+									</Col>
+								))}
+							</Row>
+							<Row>
+								<TitledParagraph title='Description' paragrah={data.originDescription} />
+							</Row>
+						</Col>
 					</div>
 				)}
 				{isLoading && 'Loading...'}

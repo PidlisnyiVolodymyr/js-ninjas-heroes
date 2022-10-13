@@ -1,8 +1,9 @@
+import { BASE_DEV_API_URL } from './constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ISuperPower } from '../models/ISuperPower';
 
 export const superPowersApi = createApi({
-	baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/superpower/' }),
+	baseQuery: fetchBaseQuery({ baseUrl: BASE_DEV_API_URL, mode: 'cors' }),
 	tagTypes: ['SuperPower'],
 	reducerPath: 'superPowersApi',
 	endpoints: (builder) => ({

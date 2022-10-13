@@ -1,3 +1,4 @@
+import { BASE_DEV_API_URL } from './constants';
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
 import axios, { AxiosRequestConfig, AxiosError } from 'axios';
 import { IHero } from '../models/IHero';
@@ -13,7 +14,12 @@ const axiosBaseQuery =
 	}> =>
 	async ({ url, method, data, params }) => {
 		try {
-			const result = await axios({ url: baseUrl + url, method, data, params });
+			const result = await axios({
+				url: baseUrl + url,
+				method,
+				data,
+				params,
+			});
 			return { data: result.data };
 		} catch (axiosError) {
 			let err = axiosError as AxiosError;
@@ -27,7 +33,7 @@ const axiosBaseQuery =
 	};
 
 export const heroesApi = createApi({
-	baseQuery: axiosBaseQuery({ baseUrl: 'http://localhost:3000/' }),
+	baseQuery: axiosBaseQuery({ baseUrl: BASE_DEV_API_URL }),
 	tagTypes: ['Hero'],
 	reducerPath: 'heroesAPI',
 	endpoints: (builder) => ({
@@ -76,6 +82,17 @@ export const heroesApi = createApi({
 				};
 			},
 		}),
+		fetchPartialHeroes: builder.query<{ heroes: IHero[]; totalPages: number }, { page: number; heroesPerPage: number }>(
+			{
+				providesTags: ['Hero'],
+				query: (body) => {
+					return {
+						url: `hero/${body.page}/${body.heroesPerPage}`,
+						method: 'Get',
+					};
+				},
+			}
+		),
 		deleteHero: builder.mutation({
 			invalidatesTags: ['Hero'],
 			query: (id) => {
@@ -136,4 +153,5 @@ export const {
 	useFetchHeroByNameQuery,
 	useEditHeroMutation,
 	useDeleteHeroImageMutation,
+	useFetchPartialHeroesQuery,
 } = heroesApi;
